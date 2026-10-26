@@ -1,4 +1,4 @@
-const fs=require('node:fs');const path=require('node:path');const {ethers}=require('ethers');const chain=require('../backend/blockchain.cjs');const config=require('../backend/config.cjs');
+const fs=require('node:fs');const path=require('node:path');const {ethers}=require('ethers');const chain=require('../backend/services/blockchain.service.cjs');const config=require('../backend/config/environment.cjs');
 async function deploy(){
  const p=chain.provider();
  if(Number(await p.send('eth_chainId',[]))!==config.chainId)throw Error('CHAIN_ID no corresponde al RPC');

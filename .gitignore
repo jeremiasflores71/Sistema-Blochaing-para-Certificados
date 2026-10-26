@@ -6,3 +6,4 @@ cache/
 runtime/
 test-runtime/
 *.log
+tmp/

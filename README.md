@@ -90,28 +90,20 @@ El journal solo cubre despliegues y operaciones enviados por esta aplicación; t
 
 **Respaldar la carpeta `runtime` completa y `.env` con la aplicación detenida**. Contiene SQLite, documentos, contrato configurado, journal y credenciales iniciales. No borrar el journal conservando la base de datos ni iniciar otra red ajena en 8545.
 
-## Organización
+## Organización MVC
 
-```text
-contracts/AcademicCertRegistry.sol  Contrato AccessControl y eventos
-backend/server.cjs                API REST, autenticación, roles y validación
-backend/db.cjs                    SQLite, semilla y bitácora
-backend/migrations/001.sql        Esquema y relaciones
-backend/blockchain.cjs            Firma, consultas y serialización de envíos
-backend/certificates.cjs          Emisión, integridad, revocación y recuperación
-backend/pdf.cjs                   PDF institucional con QR
-frontend/main.jsx                 Pantallas React y rutas
-frontend/style.css                Interfaz adaptable y Tailwind
-scripts/setup.cjs                 Configuración y compilación
-scripts/dev.cjs                   Lanzador y restauración local
-scripts/deploy.cjs                Despliegue real con ethers
-tests/contract/registry.cjs        Pruebas Hardhat
-tests/api.test.cjs                Integración HTTP + SQLite + EVM + PDF
-docs/diagramas/                   Arquitectura, datos y secuencias
-runtime/                          Datos privados, ignorados por Git
-```
+El backend separa modelos, controladores, rutas y servicios. React representa las vistas, con cada pantalla en su propio archivo. Consulta [la estructura MVC y equivalencia de rutas](docs/ESTRUCTURA_MVC.md) para el mapa completo.
 
-SQLite contiene las tablas `usuarios`, `estudiantes`, `certificados`, `transacciones`, `bitacora` y control de migraciones. El esquema usa claves foráneas, índices y restricciones únicas. Se aplica de forma idempotente en cada inicio. Las consultas son parametrizadas. La semilla crea dos usuarios y una estudiante ficticia; no inventa emisiones ni estadísticas.
+- backend/models: consultas de usuarios, estudiantes, certificados, transacciones y bitácora.
+- backend/controllers y backend/routes: solicitudes HTTP, respuestas y permisos.
+- backend/services: emisión, verificación, PDF, Blockchain y autenticación.
+- backend/database: conexión, semilla y migración SQLite existente.
+- frontend/src/views: pantallas; components: elementos compartidos; layouts: estructura del panel.
+- frontend/src/services, context y hooks: API, sesión y carga de datos.
+- scripts: preparación, arranque y despliegue. Los informes terminados se conservan en output/documentos.
+- docs/referencias: informe original; runtime: datos privados existentes.
+
+La configuración y las dependencias permanecen en la raíz. SQLite mantiene las mismas tablas, relaciones y restricciones, sin cambios de esquema ni de datos. Los documentos Word previos describen la organización anterior; ESTRUCTURA_MVC.md indica los archivos equivalentes.
 
 ## API principal
 
@@ -183,5 +175,4 @@ En esa red no se inicia Hardhat ni se reproducen transacciones. Después del des
 - Herramientas de desarrollo Hardhat 2/Tailwind 3 conservan avisos transitivos de `npm audit`; se actualizaron las dependencias de la aplicación y Vite/PostCSS. Consultar `npm audit` antes de un despliegue público. La red y la aplicación escuchan por defecto en loopback.
 
 Documentación de referencia: [Hardhat Network](https://v2.hardhat.org/hardhat-network/docs/overview) y [SQLite integrado de Node.js](https://nodejs.org/download/release/latest-v24.x/docs/api/sqlite.html).
-#   S i s t e m a - B l o c h a i n g - p a r a - C e r t i f i c a d o s  
- 
+# Sistema-Blochaing-para-Certificados

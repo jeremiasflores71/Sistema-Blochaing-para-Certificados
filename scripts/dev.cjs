@@ -1,5 +1,5 @@
 const {spawn}=require('node:child_process');const fs=require('node:fs');const path=require('node:path');
-require('dotenv').config({quiet:true});const config=require('../backend/config.cjs');const chain=require('../backend/blockchain.cjs');const children=[];
+require('dotenv').config({quiet:true});const config=require('../backend/config/environment.cjs');const chain=require('../backend/services/blockchain.service.cjs');const children=[];
 function run(file,args=[],quiet=false){const p=spawn(process.execPath,[file,...args],{stdio:quiet?['ignore','ignore','pipe']:'inherit',windowsHide:true});children.push(p);if(quiet)p.stderr.on('data',b=>process.stderr.write(b));p.on('exit',code=>{if(code && !stopping){console.error('Proceso finalizado',file,code);stop(code);}});return p;}
 let stopping=false;function stop(code=0){if(stopping)return;stopping=true;for(const c of children)c.kill();setTimeout(()=>process.exit(code),500);}
 process.on('SIGINT',()=>stop());process.on('SIGTERM',()=>stop());

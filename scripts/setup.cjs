@@ -4,7 +4,7 @@ if(!fs.existsSync('.env')){
  fs.writeFileSync('.env',env);console.log('Configuración privada .env creada.');
 }
 require('dotenv').config({quiet:true});
-require('../backend/db.cjs').seed();
+require('../backend/database/seed.cjs').seed();
 fs.mkdirSync('runtime',{recursive:true});
 fs.writeFileSync('runtime/ACCESO_LOCAL.md',`# Acceso local de demostración\n\nURL: http://localhost:5173\n\n| Rol | Correo | Contraseña inicial |\n| --- | --- | --- |\n| Administrador | admin@umsa.local | ${process.env.ADMIN_PASSWORD} |\n| Emisor | emisor@umsa.local | ${process.env.ISSUER_PASSWORD} |\n\nEstas credenciales se generaron para este prototipo local. No publicar este archivo ni .env.\n`);
 const r=spawnSync(process.execPath,['node_modules/hardhat/internal/cli/cli.js','compile'],{stdio:'inherit'});if(r.status)process.exit(r.status);
