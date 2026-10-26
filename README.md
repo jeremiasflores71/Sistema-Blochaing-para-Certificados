@@ -16,6 +16,10 @@ npm run dev
 
 Abrir **http://localhost:5173**. `setup` crea `.env`, genera secretos y contraseñas aleatorias, crea la base de datos y compila el contrato usando `solc` instalado, sin descargar compiladores adicionales. No sobreescribe `.env` ni los usuarios existentes.
 
+## Publicación en GitHub Pages
+
+El repositorio incluye un flujo de GitHub Actions que compila y publica automáticamente el frontend en `https://jeremiasflores71.github.io/Sistema-Blochaing-para-Certificados/`. GitHub Pages solamente aloja los archivos estáticos generados en `dist`; el backend Express, SQLite y la red Hardhat deben ejecutarse en un servidor separado para habilitar inicio de sesión, emisión y verificación completa. La URL del backend puede configurarse durante el build con `VITE_API_BASE_URL`.
+
 Las credenciales iniciales están en **runtime/ACCESO_LOCAL.md**, generado por `setup`:
 
 | Rol | Usuario | Contraseña |

@@ -18,6 +18,6 @@ function App() {
   return <Session.Provider value={{
     user,
     setUser
-  }}><BrowserRouter><Routes><Route path="/login" element={<Login />} /><Route path="/verificar" element={<Verification />} /><Route path="/verificar/:code" element={<Verification />} /><Route path="*" element={<Layout />} /></Routes></BrowserRouter></Session.Provider>;
+  }}><BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}><Routes><Route path="/login" element={<Login />} /><Route path="/verificar" element={<Verification />} /><Route path="/verificar/:code" element={<Verification />} /><Route path="*" element={<Layout />} /></Routes></BrowserRouter></Session.Provider>;
 }
 export { App };

@@ -1,9 +1,10 @@
 async function api(url, options = {}) {
+  const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
   const token = sessionStorage.getItem('token');
   const unavailable = 'No se puede conectar con el servidor. Inicia el sistema con npm run dev y mantén la terminal abierta. Después recarga esta página.';
   let res;
   try {
-    res = await fetch('/api' + url, {
+    res = await fetch(apiBase + url, {
       ...options,
       headers: {
         ...(options.body instanceof FormData ? {} : {

@@ -24,7 +24,7 @@ function Detail() {
     setFailure('');
     setBusy(true);
     try {
-      const r = await fetch('/api/certificates/' + id + '/pdf', {
+      const r = await fetch((import.meta.env.VITE_API_BASE_URL || '/api') + '/certificates/' + id + '/pdf', {
         headers: {
           Authorization: 'Bearer ' + sessionStorage.getItem('token')
         }
