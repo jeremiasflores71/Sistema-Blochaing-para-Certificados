@@ -1,0 +1,47 @@
+erDiagram
+    usuarios ||--o{ certificados : emite
+    usuarios ||--o{ bitacora : realiza
+    estudiantes ||--o{ certificados : recibe
+    certificados ||--o{ transacciones : registra
+    usuarios {
+        string id PK
+        string email UK
+        string password
+        string rol
+        boolean activo
+    }
+    estudiantes {
+        string id PK
+        string documento UK
+        string nombres
+        string apellidos
+        string carrera
+    }
+    certificados {
+        string id PK
+        string codigo UK
+        string estudiante_id FK
+        string emisor_id FK
+        string datos
+        string salt
+        string hash
+        string pdf_hash
+        string estado
+        string pdf_path
+        string tx_hash
+        string revoke_tx
+    }
+    transacciones {
+        string id PK
+        string certificado_id FK
+        string tipo
+        string hash
+        string estado
+    }
+    bitacora {
+        string id PK
+        string usuario_id FK
+        string accion
+        string detalle
+        string created_at
+    }

@@ -1,0 +1,48 @@
+
+> umsa-certificacion-blockchain@1.0.0 test
+> hardhat test && node --test tests/api.test.cjs
+
+
+
+  AcademicCertRegistry · contrato real
+    √ registra ambos hashes y emite evento
+    √ rechaza emisión no autorizada y hashes vacíos
+    √ rechaza emisión duplicada
+    √ un hash inexistente jamás es válido
+    √ permite revocar al emisor original y conserva el registro
+    √ otro emisor no puede revocar certificados ajenos
+    √ el administrador puede revocar y retirar autorización
+    √ rechaza revocación inexistente y administración ajena
+
+
+  8 passing (704ms)
+
+AcademicCertRegistry desplegado: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+▶ Flujo integral con SQLite, PDF y transacciones reales
+  ✔ API y base de datos responden (102.4647ms)
+  ✔ login y rechazo de credenciales incorrectas (1007.5995ms)
+  ✔ protección de rutas y roles (18.9927ms)
+  ✔ registro, edición y prevención de documentos duplicados (49.2818ms)
+  ✔ emisión confirmada con dos hashes en cadena (374.2081ms)
+  ✔ PDF privado, descarga e integridad (53.7474ms)
+  ✔ QR incrustado se decodifica y su código verifica sin sesión (166.7119ms)
+  ✔ PDF original válido; archivo modificado e inexistente rechazados (295.3807ms)
+No puede revocar certificados de otro emisor
+  ✔ administración de emisores y desactivación inmediata del JWT (734.9533ms)
+Solo se revocan certificados emitidos
+  ✔ revocación confirmada, código y PDF muestran revocado (422.9458ms)
+  ✔ bitácora y estadísticas usan datos persistidos (19.4078ms)
+  ✔ recupera un estado interrumpido contrastando contrato y PDF (304.2459ms)
+  ✔ CSV registra cada fila con resultado independiente (251.7719ms)
+No se completó la emisión. El registro permanece en error para reconciliarlo con la cadena.
+  ✔ fallo real de Blockchain no produce un resultado válido (137.4993ms)
+  ✔ reinicio de API, SQLite y red conserva certificados y revocaciones (1726.2329ms)
+✔ Flujo integral con SQLite, PDF y transacciones reales (8492.0592ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8826.4889

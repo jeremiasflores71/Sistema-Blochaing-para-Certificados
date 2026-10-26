@@ -1,0 +1,7 @@
+flowchart LR
+    Browser[React + Router + Tailwind] -->|REST + JWT| API[Express monolito modular]
+    API --> SQLite[(SQLite privado)]
+    API --> PDF[PDF y QR privados]
+    API --> Crypto[SHA-256 + salt]
+    API -->|ethers JSON-RPC| Registry[AcademicCertRegistry]
+    Registry --> EVM[Hardhat local / Sepolia]

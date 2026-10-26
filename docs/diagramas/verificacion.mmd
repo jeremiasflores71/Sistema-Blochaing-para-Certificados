@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor Público
+    participant React
+    participant API
+    participant SQLite
+    participant Contrato
+    Público->>React: QR, código o PDF
+    React->>API: GET /verify/:codigo o POST /verify/file
+    API->>SQLite: Consulta certificado
+    API->>API: Recalcula hash canónico y opcional SHA-256 PDF
+    API->>Contrato: verify(certHash)
+    Contrato-->>API: exists, revoked, issuer, issuedAt, pdfHash
+    API-->>React: Válido, revocado, modificado o inexistente
+    Note over API,Contrato: RPC no disponible: ERROR_BLOCKCHAIN, nunca válido

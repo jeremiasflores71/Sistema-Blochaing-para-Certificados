@@ -1,0 +1,18 @@
+sequenceDiagram
+    actor Emisor
+    participant React
+    participant API
+    participant SQLite
+    participant PDF
+    participant Contrato
+    Emisor->>React: Completa formulario
+    React->>API: POST /api/certificates + JWT
+    API->>API: Valida, UUID, salt, JSON canónico, SHA-256
+    API->>SQLite: Estado pendiente
+    API->>PDF: Genera PDF con UUID y QR; SHA-256
+    API->>SQLite: Ruta privada y hash PDF
+    API->>Contrato: issue(certHash, pdfHash)
+    Contrato-->>API: Recibo confirmado
+    API->>SQLite: Estado emitido, transacción y bitácora
+    API-->>React: Certificado descargable
+    Note over API,SQLite: Si falla: estado error; reconciliación posterior
